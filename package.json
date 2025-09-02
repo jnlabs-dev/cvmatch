@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "next": "15.5.2",
     "postcss": "^8.5.6",
     "preline": "^3.2.3",
