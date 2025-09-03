@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import PrelineScriptWrapper from "@/app/components/preline/PrelineScriptWrapper";
+import { Layout } from "@/app/components/layout/Layout";
+import { PrelineScriptWrapper } from "@/app/components/preline/PrelineScriptWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,9 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PrelineScriptWrapper />
-        {children}
+        <Layout>
+          {children}
+        </Layout>
       </body>
+      <PrelineScriptWrapper />
     </html>
   );
 }

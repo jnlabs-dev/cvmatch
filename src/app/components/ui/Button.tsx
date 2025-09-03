@@ -1,4 +1,3 @@
-import React from "react";
 import clsx from "clsx";
 
 type ButtonProps = {
@@ -19,7 +18,7 @@ export function Button({
   const variants = {
     primary: clsx(
       base,
-      "text-white bg-[image:var(--gradient-primary)] bg-[length:150%_150%] hover:bg-[position:100%_0]"
+      "text-white bg-[image:var(--gradient-primary)] bg-[length:160%_150%] hover:bg-[position:100%_0]"
     ),
     neutral: clsx(
       base,

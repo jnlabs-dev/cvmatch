@@ -29,12 +29,12 @@
   --color-foreground: #111827;
 
   /* brand solids */
-  --color-primary: #FB923C;   /* orange */
-  --color-secondary: #F472B6; /* pink */
+  --color-primary: #f1477a; /* pink */
+  --color-secondary: #FB923C;   /* orange */
 
   /* gradient built from solids */
   --gradient-primary: linear-gradient(
-    90deg,
+    -90deg,
     var(--color-secondary) 0%,
     var(--color-primary) 100%
   );
