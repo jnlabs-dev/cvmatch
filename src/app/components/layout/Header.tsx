@@ -4,10 +4,11 @@ import { SIDEBAR_ID, SIDEBAR_SELECTOR } from '@/app/constants/layout.constants';
 
 import { IconButton } from '@/app/components/ui/IconButton';
 import { Logo } from '@/app/components/ui/Logo';
+import { UserMenu } from '@/app/components/navigation/UserMenu';
 
 export function Header() {
   return (
-    <header className="lg:hidden grid grid-cols-[1fr_auto_1fr] items-center py-4 px-4 bg-white border-b border-gray-200">
+    <header className="lg:hidden grid grid-cols-[1fr_auto_1fr] items-center p-3 xs:p-4 bg-white border-b border-gray-200">
       <IconButton
         type="button"
         className="justify-self-start"
@@ -20,7 +21,9 @@ export function Header() {
         <MenuIcon className="justify-self-center shrink-0 size-6 stroke-[var(--color-foreground)]" />
       </IconButton>
       <Logo />
-      <div className="justify-self-end"></div>
+      <div className="justify-self-end">
+        <UserMenu condensed={true} />
+      </div>
     </header>
   );
 }
