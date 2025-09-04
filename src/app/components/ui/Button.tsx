@@ -12,16 +12,15 @@ export function Button({
   className,
   ...props
 }: ButtonProps) {
-  const base =
-    "inline-flex items-center justify-center px-6 py-2 rounded-lg font-medium shadow transition-all duration-300 ease-in-out";
+  const baseClassNames = "inline-flex items-center justify-center px-6 py-2 rounded-lg font-medium shadow transition-all duration-300 ease-in-out";
 
   const variants = {
     primary: clsx(
-      base,
+      baseClassNames,
       "text-white bg-[image:var(--gradient-primary)] bg-[length:160%_150%] hover:bg-[position:100%_0]"
     ),
     neutral: clsx(
-      base,
+      baseClassNames,
       "text-foreground bg-surface border border-border hover:bg-muted/10"
     ),
   };
