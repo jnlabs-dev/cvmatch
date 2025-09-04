@@ -1,7 +1,5 @@
 import clsx from "clsx";
 
-import { FileCodeIcon } from "lucide-react";
-
 type LogoProps = {
   className?: string;
 } & React.HTMLAttributes<HTMLAnchorElement>;

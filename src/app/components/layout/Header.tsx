@@ -4,7 +4,7 @@ import { SIDEBAR_ID, SIDEBAR_SELECTOR } from '@/app/constants/layout.constants';
 
 import { IconButton } from '@/app/components/ui/IconButton';
 import { Logo } from '@/app/components/ui/Logo';
-import { UserMenu } from '@/app/components/navigation/UserMenu';
+import { UserMenu } from '@/app/components/user/UserMenu';
 
 export function Header() {
   return (
