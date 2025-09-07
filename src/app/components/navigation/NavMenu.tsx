@@ -2,7 +2,7 @@
 
 import { clsx } from "clsx";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import {
   FoldersIcon,
@@ -28,6 +28,8 @@ type NavMenuProps = {
 export function NavMenu({
   className
 }: NavMenuProps) {
+  const pathname = usePathname();
+  console.log("🚀 ~ NavMenu ~ pathname:", pathname)
   const router = useRouter();
 
   const primaryMenuItems: NavMenuItemProps[] = [
@@ -66,8 +68,7 @@ export function NavMenu({
         size: "small",
         children: "Upgrade",
         EndIcon: CrownIcon,
-        animatePing: true,
-        onClick: () => router.push("/billing")
+        animatePing: true
       }
     },
     {
@@ -82,6 +83,8 @@ export function NavMenu({
     },
   ];
 
+  const isActiveMenuItem = (item: NavMenuItemProps) => pathname.startsWith(item.path);
+
   const handleCloseHSOverlay = () => {
     if (typeof window !== "undefined" && window.HSOverlay) {
       window.HSOverlay.close(SIDEBAR_SELECTOR);
@@ -95,7 +98,7 @@ export function NavMenu({
           {primaryMenuItems.map((item, index) => (
             <NavMenuItem
               key={index}
-              active={index === 0}
+              active={isActiveMenuItem(item)}
               {...item}
               onClick={handleCloseHSOverlay}
             />
@@ -118,6 +121,7 @@ export function NavMenu({
           <NavMenuItem
             key={index}
             {...item}
+            active={isActiveMenuItem(item)}
             onClick={handleCloseHSOverlay}
           />
         ))}
