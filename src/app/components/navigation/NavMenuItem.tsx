@@ -39,7 +39,7 @@ export function NavMenuItem({
       {secondaryAction ? (
         <Button {...secondaryAction} />
       ) : null}
-      <span className={clsx("absolute top-0 end-0 h-full w-1 bg-[var(--color-primary)]", active ? "opacity-100" : "opacity-0")} />
+      <span className={clsx("absolute top-0 end-0 h-full bg-[var(--color-primary)] transition-all duration-300 rounded-l-xl", active ? "w-1" : "w-0")} />
     </Link>
   );
 }

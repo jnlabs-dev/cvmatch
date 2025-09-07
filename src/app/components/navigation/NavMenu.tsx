@@ -29,7 +29,6 @@ export function NavMenu({
   className
 }: NavMenuProps) {
   const pathname = usePathname();
-  console.log("🚀 ~ NavMenu ~ pathname:", pathname)
   const router = useRouter();
 
   const primaryMenuItems: NavMenuItemProps[] = [
