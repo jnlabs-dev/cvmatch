@@ -95,13 +95,14 @@ export function NavMenu({
     <nav className={clsx("w-full min-h-full flex flex-col justify-between gap-8 overflow-hidden", className)}>
       <div className="flex flex-col gap-4">
         <ul className="space-y-1">
-          {primaryMenuItems.map((item, index) => (
-            <NavMenuItem
-              key={index}
-              active={isActiveMenuItem(item)}
-              {...item}
-              onClick={handleCloseHSOverlay}
-            />
+          {primaryMenuItems.map((item) => (
+            <li key={item.path}>
+              <NavMenuItem
+                {...item}
+                active={isActiveMenuItem(item)}
+                onClick={handleCloseHSOverlay}
+              />
+            </li>
           ))}
         </ul>
         <Button
@@ -117,13 +118,14 @@ export function NavMenu({
         </Button>
       </div>
       <ul className="space-y-1">
-        {secondaryMenuItems.map((item, index) => (
-          <NavMenuItem
-            key={index}
-            {...item}
-            active={isActiveMenuItem(item)}
-            onClick={handleCloseHSOverlay}
-          />
+        {secondaryMenuItems.map((item) => (
+          <li key={item.path}>
+            <NavMenuItem
+              {...item}
+              active={isActiveMenuItem(item)}
+              onClick={handleCloseHSOverlay}
+            />
+          </li>
         ))}
       </ul>
     </nav>
