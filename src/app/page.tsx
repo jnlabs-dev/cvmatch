@@ -1,4 +1,6 @@
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default function HomePage() {
+  redirect('/projects/new');
   return null;
 }

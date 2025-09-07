@@ -37,7 +37,7 @@ export function Sidebar() {
           </div>
         </div>
         <ScrollableArea className="h-full">
-          <NavMenu className="pb-12 md:pb-6" />
+          <NavMenu className="pb-12 lg:pb-6" />
         </ScrollableArea>
         <div className="hidden lg:block p-6 pb-16 border-t border-gray-200">
           <UserMenu />

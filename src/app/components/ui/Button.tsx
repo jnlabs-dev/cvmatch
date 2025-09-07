@@ -9,6 +9,7 @@ export type ButtonProps = {
   className?: string;
   StartIcon?: LucideIcon;
   EndIcon?: LucideIcon;
+  animatePing?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button({
@@ -18,9 +19,10 @@ export function Button({
   className,
   StartIcon,
   EndIcon,
+  animatePing,
   ...props
 }: ButtonProps) {
-  const baseClassNames = "inline-flex items-center justify-center shadow transition-all duration-300 ease-in-out";
+  const baseClassNames = "inline-flex items-center justify-center shadow transition-all duration-300 ease-in-out relative group";
 
   const variants = {
     primary: clsx(
@@ -50,6 +52,7 @@ export function Button({
       {StartIcon ? <StartIcon className={startIconSizes[size]} /> : null}
       {children}
       {EndIcon ? <EndIcon className={endIconSizes[size]} /> : null}
+      {animatePing ? <span className="animate-ping absolute inline-flex size-full rounded bg-[var(--color-primary)] opacity-15 group-hover:hidden"></span> : null}
     </button>
   );
 }
