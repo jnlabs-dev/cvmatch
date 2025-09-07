@@ -1,4 +1,5 @@
 "use client";
+
 import { clsx } from "clsx";
 
 import { useRouter } from "next/navigation";
@@ -17,6 +18,8 @@ import {
 
 import { Button } from "@/app/components/ui/Button";
 import { NavMenuItem, type NavMenuItemProps } from "@/app/components/navigation/NavMenuItem";
+
+import { SIDEBAR_SELECTOR } from "@/app/constants/layout.constants";
 
 type NavMenuProps = {
   className?: string
@@ -79,6 +82,12 @@ export function NavMenu({
     },
   ];
 
+  const handleCloseHSOverlay = () => {
+    if (typeof window !== "undefined" && window.HSOverlay) {
+      window.HSOverlay.close(SIDEBAR_SELECTOR);
+    }
+  };
+
   return (
     <nav className={clsx("w-full min-h-full flex flex-col justify-between gap-8 overflow-hidden", className)}>
       <div className="flex flex-col gap-4">
@@ -88,6 +97,7 @@ export function NavMenu({
               key={index}
               active={index === 0}
               {...item}
+              onClick={handleCloseHSOverlay}
             />
           ))}
         </ul>
@@ -95,7 +105,10 @@ export function NavMenu({
           className="self-center"
           variant="primary"
           StartIcon={PlusIcon}
-          onClick={() => router.push("/projects/new")}
+          onClick={() => {
+            router.push("/projects/new");
+            handleCloseHSOverlay();
+          }}
         >
           New Project
         </Button>
@@ -105,6 +118,7 @@ export function NavMenu({
           <NavMenuItem
             key={index}
             {...item}
+            onClick={handleCloseHSOverlay}
           />
         ))}
       </ul>

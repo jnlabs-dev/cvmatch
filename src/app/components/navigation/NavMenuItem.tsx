@@ -13,6 +13,7 @@ export type NavMenuItemProps = {
   Icon: LucideIcon;
   count?: number;
   secondaryAction?: ButtonProps;
+  onClick?: () => void;
 }
 
 export function NavMenuItem({
@@ -21,12 +22,13 @@ export function NavMenuItem({
   label,
   Icon,
   count,
-  secondaryAction
+  secondaryAction,
+  onClick
 }: NavMenuItemProps) {
   const baseClassNames = "flex items-center justify-between py-1 px-5 xs:py-2 xs:px-6 lg:py-3 font-semibold text-[var(--color-muted)] overflow-hidden";
   return (
     <li className={clsx(baseClassNames, className)}>
-      <Link href={path} className="flex flex-1 items-center gap-2">
+      <Link href={path} className="flex flex-1 items-center gap-2" onClick={onClick}>
         <Icon className="size-5" />
         {label}
       </Link>

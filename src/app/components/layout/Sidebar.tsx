@@ -13,7 +13,7 @@ export function Sidebar() {
     <div
       id={SIDEBAR_ID}
       className={clsx(
-        "hs-overlay hs-overlay-open:translate-x-0",
+        "hs-overlay hs-overlay-open:translate-x-0 hs-overlay-backdrop-open:bg-gray-800/20",
         "w-[280px]",
         "[--auto-close:md] lg:block lg:translate-x-0 lg:end-auto lg:bottom-0",
         "-translate-x-full transition-all duration-300 transform",
