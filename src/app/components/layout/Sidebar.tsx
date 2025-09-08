@@ -57,11 +57,11 @@ export function Sidebar() {
         <ScrollableArea className="h-full">
           <NavMenu className="pb-12 lg:pb-6" />
         </ScrollableArea>
-        <div className="hidden lg:block border-t pb-16 border-gray-200">
-          <div className="hs-overlay-minified:hidden p-6">
+        <div className="hidden lg:block border-t pt-6 pb-16 border-gray-200">
+          <div className="hs-overlay-minified:hidden px-6">
             <UserMenu />
           </div>
-          <div className="hidden hs-overlay-minified:inline-block p-4 flex items-center justify-center">
+          <div className="hidden hs-overlay-minified:inline-block px-4 flex items-center justify-center">
             <UserMenu variant="condensed" />
           </div>
         </div>
