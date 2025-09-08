@@ -9,7 +9,7 @@ export function TextInput({
   type = "text",
   ...props
 }: TextInputProps) {
-  const baseClassNames = "peer py-2.5 sm:py-3 px-4 block border-transparent rounded-lg sm:text-sm focus:border-[var(--color-secondary)] ring-0 disabled:opacity-50 disabled:pointer-events-none text-[var(--color-foreground)]";
+  const baseClassNames = "peer  p-1 px-2 sm:p-2 block border-transparent rounded-lg text-xs xs:text-sm focus:border-[var(--color-secondary)] ring-0 disabled:opacity-50 disabled:pointer-events-none text-[var(--color-foreground)]";
   return (
     <input {...props} type={type} className={clsx(baseClassNames, className)}  />
   );
