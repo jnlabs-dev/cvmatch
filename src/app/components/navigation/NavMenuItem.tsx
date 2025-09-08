@@ -26,15 +26,15 @@ export function NavMenuItem({
   secondaryAction,
   onClick
 }: NavMenuItemProps) {
-  const baseClassNames = "flex items-center justify-between py-1 px-5 xs:py-2 xs:px-6 lg:py-3 font-semibold overflow-hidden relative hover:bg-muted/10 transition-all duration-300";
+  const baseClassNames = "flex items-center justify-between py-1 px-5 xs:py-2 xs:px-6 lg:py-3 font-semibold overflow-hidden relative hover:bg-muted/10 transition-all duration-300 whitespace-nowrap";
   return (
     <Link href={path} className={clsx(baseClassNames, className)}>
-      <div className={clsx("flex flex-1 items-center gap-2", active ? "text-[var(--color-primary)]" : "text-[var(--color-muted)]")} onClick={onClick}>
-        <Icon className={clsx("size-5", active && "text-[var(--color-primary)]")} />
-        {label}
+      <div className={clsx("flex flex-1 items-center gap-2 hs-overlay-minified:justify-center", active ? "text-[var(--color-primary)]" : "text-[var(--color-muted)]")} onClick={onClick}>
+        <Icon className={clsx("size-5 hs-overlay-minified:size-6", active && "text-[var(--color-primary)]")} />
+        <span className="hs-overlay-minified:hidden">{label}</span>
       </div>
       {count !== undefined ? (
-        <span className={clsx("text-sm font-bold rounded px-1 text-white", active ? "bg-[var(--color-secondary)]" : "bg-gray-200")}>{count}</span>
+        <span className={clsx("text-sm font-bold rounded px-1 text-white hs-overlay-minified:hidden", active ? "bg-[var(--color-secondary)]" : "bg-gray-200")}>{count}</span>
       ) : null}
       {secondaryAction ? (
         <Button {...secondaryAction} />

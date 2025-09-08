@@ -65,6 +65,7 @@ export function NavMenu({
       secondaryAction: {
         variant: "primary",
         size: "small",
+        className: "hs-overlay-minified:hidden",
         children: "Upgrade",
         EndIcon: CrownIcon,
         animatePing: true
@@ -105,7 +106,7 @@ export function NavMenu({
           ))}
         </ul>
         <Button
-          className="self-center"
+          className="self-center hs-overlay-minified:py-2 hs-overlay-minified:pl-5 hs-overlay-minified:pr-0 max-h-[36px] whitespace-nowrap"
           variant="primary"
           StartIcon={PlusIcon}
           onClick={() => {
@@ -113,7 +114,7 @@ export function NavMenu({
             handleCloseHSOverlay();
           }}
         >
-          New Project
+          <span className="hs-overlay-minified:hidden">New Project</span>
         </Button>
       </div>
       <ul className="space-y-1">

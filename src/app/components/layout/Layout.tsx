@@ -14,7 +14,7 @@ export function Layout({
       <Sidebar />
       <div className="h-screen flex flex-col overflow-hidden">
         <Header />
-        <main className="flex flex-1 flex-col lg:hs-overlay-layout-open:ms-[280px] transition-all duration-300 overflow-hidden">
+        <main className="flex flex-1 flex-col xl:hs-overlay-layout-open:ms-[280px] xl:hs-overlay-minified:ms-[82px] transition-all duration-300 overflow-hidden">
           {children}
         </main>
       </div>

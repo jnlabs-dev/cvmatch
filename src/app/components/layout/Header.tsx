@@ -8,7 +8,7 @@ import { UserMenu } from '@/app/components/user/UserMenu';
 
 export function Header() {
   return (
-    <header className="lg:hidden grid grid-cols-[1fr_auto_1fr] items-center p-3 xs:p-4 bg-white border-b border-gray-200">
+    <header className="xl:hidden grid grid-cols-[1fr_auto_1fr] items-center p-3 xs:p-4 bg-white border-b border-gray-200">
       <IconButton
         type="button"
         className="justify-self-start"
@@ -22,7 +22,7 @@ export function Header() {
       </IconButton>
       <Logo />
       <div className="justify-self-end">
-        <UserMenu condensed={true} />
+        <UserMenu variant="condensed" />
       </div>
     </header>
   );
