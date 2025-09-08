@@ -17,25 +17,28 @@ const defaultDropzoneOptions: DropzoneOptions = {
 
 export type ResumeDropzoneProps = {
   className?: string;
+  onFileAccepted: (acceptedFile: File) => void;
 };
 
 export function ResumeDropzone({
   className,
+  onFileAccepted
 }: ResumeDropzoneProps) {
   const onDropAccepted = useCallback((acceptedFiles: File[]) => {
-    acceptedFiles.forEach((file) => {
-      const reader = new FileReader()
+    onFileAccepted(acceptedFiles[0]);
+    // acceptedFiles.forEach((file) => {
+    //   const reader = new FileReader()
 
-      reader.onabort = () => console.log('file reading was aborted')
-      reader.onerror = () => console.log('file reading has failed')
-      reader.onload = () => {
-      // Do whatever you want with the file contents
-        const binaryStr = reader.result
-        console.log("🚀 ~ ResumeDropzone ~ binaryStr:", binaryStr)
-      }
-      reader.readAsArrayBuffer(file)
-    })
-  }, []);
+    //   reader.onabort = () => console.log('file reading was aborted')
+    //   reader.onerror = () => console.log('file reading has failed')
+    //   reader.onload = () => {
+    //   // Do whatever you want with the file contents
+    //     const binaryStr = reader.result
+    //     console.log("🚀 ~ ResumeDropzone ~ binaryStr:", binaryStr)
+    //   }
+    //   reader.readAsArrayBuffer(file)
+    // })
+  }, [onFileAccepted]);
 
   const onDropRejected = useCallback((rejectedFiles: FileRejection[]) => {
     console.log("🚀 ~ ResumeDropzone ~ rejectedFiles:", rejectedFiles);

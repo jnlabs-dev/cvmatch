@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Layout } from "@/app/components/layout/Layout";
-import { PrelineScriptWrapper } from "@/app/components/preline/PrelineScriptWrapper";
+import { PrelineScript } from "@/app/components/preline/PrelineScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +34,7 @@ export default function RootLayout({
           {children}
         </Layout>
       </body>
-      <PrelineScriptWrapper />
+      <PrelineScript />
     </html>
   );
 }
