@@ -33,12 +33,6 @@ export function NavMenu({
 
   const primaryMenuItems: NavMenuItemProps[] = [
     {
-      label: "Projects",
-      path: "/projects",
-      Icon: FoldersIcon,
-      count: 0
-    },
-    {
       label: "CVs",
       path: "/resumes",
       Icon: FileTextIcon,
@@ -48,6 +42,12 @@ export function NavMenu({
       label: "Jobs",
       path: "/jobs",
       Icon: BriefcaseBusinessIcon,
+      count: 0
+    },
+    {
+      label: "Projects",
+      path: "/projects",
+      Icon: FoldersIcon,
       count: 0
     },
   ];

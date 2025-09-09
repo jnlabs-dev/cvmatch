@@ -24,15 +24,15 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const baseClassNames = "inline-flex items-center justify-center shadow transition-all duration-300 ease-in-out relative group";
+  const baseClassNames = "inline-flex items-center justify-center transition-all duration-300 ease-in-out relative group";
 
   const variants = {
     primary: clsx(
-      "bg-[image:var(--gradient-primary)] bg-[length:160%_150%]",
+      "bg-[image:var(--gradient-primary)] bg-[length:160%_150%] shadow",
       disabled ? "opacity-70 text-gray-100" : "text-white hover:bg-[position:100%_0]"
     ),
     neutral: clsx(
-      "border border-border",
+      "border border-border shadow/5",
       disabled ? "text-muted bg-muted/20" : "text-foreground bg-surface hover:bg-muted/10"
     )
   };

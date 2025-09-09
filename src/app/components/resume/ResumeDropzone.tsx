@@ -40,10 +40,11 @@ export function ResumeDropzone({
     onDropRejected: setRejectedFiles
   });
 
-  const baseClassNames = "aspect-[210/297] cursor-pointer p-12 flex flex-col gap-12 items-center justify-center bg-white border-2 border-dashed rounded-sm";
+  const baseClassNames = "aspect-[210/297] p-12 flex flex-col gap-12 items-center justify-center bg-white border-2 border-dashed rounded-sm";
+  const { onClick, ...rest } = getRootProps();
   return (
     <div
-      {...getRootProps()}
+      {...rest}
       className={clsx(baseClassNames, isDragActive ? "border-[var(--color-primary)]" : "border-gray-300", className)}
       style={{ width: 210 * 2 }}
     >
@@ -63,6 +64,7 @@ export function ResumeDropzone({
             variant="primary"
             size="small"
             StartIcon={HardDriveUploadIcon} 
+            onClick={onClick}
           >
             Upload
           </Button>
@@ -73,7 +75,7 @@ export function ResumeDropzone({
           OR
         </div>
 
-        <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center gap-2">
           <Button
             variant="neutral"
             size="small"
