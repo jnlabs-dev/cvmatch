@@ -26,7 +26,7 @@ export function NavMenuItem({
   secondaryAction,
   onClick
 }: NavMenuItemProps) {
-  const baseClassNames = "flex items-center justify-between py-1 px-5 xs:py-2 xs:px-6 lg:py-3 font-semibold overflow-hidden relative hover:bg-muted/10 transition-all duration-300 hs-tooltip";
+  const baseClassNames = "flex items-center justify-between py-1 px-5 xs:py-2 xs:px-6 lg:py-3 font-semibold overflow-hidden relative hover:bg-muted/10 transition-all duration-300 hs-tooltip hs-tooltip-toggle";
   return (
     <Link href={path} className={clsx(baseClassNames, className)}>
       <div className={clsx("flex flex-1 items-center gap-2 hs-overlay-minified:justify-center", active ? "text-[var(--color-primary)]" : "text-[var(--color-muted)]")} onClick={onClick}>

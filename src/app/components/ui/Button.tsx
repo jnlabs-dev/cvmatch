@@ -10,6 +10,7 @@ export type ButtonProps = {
   StartIcon?: LucideIcon;
   EndIcon?: LucideIcon;
   animatePing?: boolean;
+  tooltip?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button({
@@ -20,19 +21,20 @@ export function Button({
   StartIcon,
   EndIcon,
   animatePing,
+  disabled,
   ...props
 }: ButtonProps) {
   const baseClassNames = "inline-flex items-center justify-center shadow transition-all duration-300 ease-in-out relative group";
 
   const variants = {
     primary: clsx(
-      baseClassNames,
-      "text-white bg-[image:var(--gradient-primary)] bg-[length:160%_150%] hover:bg-[position:100%_0]"
+      "bg-[image:var(--gradient-primary)] bg-[length:160%_150%]",
+      disabled ? "opacity-70 text-gray-100" : "text-white hover:bg-[position:100%_0]"
     ),
     neutral: clsx(
-      baseClassNames,
-      "text-foreground bg-surface border border-border hover:bg-muted/10"
-    ),
+      "border border-border",
+      disabled ? "text-muted bg-muted/20" : "text-foreground bg-surface hover:bg-muted/10"
+    )
   };
   const sizes = {
     default: "px-4 py-1 xs:px-6 xs:py-2 font-medium rounded-lg",
@@ -48,7 +50,17 @@ export function Button({
   };
 
   return (
-    <button className={clsx(variants[variant], sizes[size], className)} {...props}>
+    <button
+      {...props}
+      disabled={disabled}
+      className={clsx(
+        baseClassNames,
+        variants[variant],
+        sizes[size],
+        className,
+        disabled ? "cursor-not-allowed" : null,
+      )}
+    >
       {StartIcon ? <StartIcon className={startIconSizes[size]} /> : null}
       {children}
       {EndIcon ? <EndIcon className={endIconSizes[size]} /> : null}

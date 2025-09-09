@@ -2,17 +2,20 @@
 
 import clsx from "clsx";
 
-import { useCallback } from "react";
-
+import { useCallback, useState } from "react";
 import { useDropzone, type DropzoneOptions, type FileRejection } from 'react-dropzone';
+import { FileUpIcon, HardDriveUploadIcon, CloudDownloadIcon, FileWarningIcon, CloudUploadIcon, OctagonAlertIcon } from "lucide-react";
 
+import { Button } from "@/app/components/ui/Button";
+
+const maxFileSizeInMB = 2;
 const defaultDropzoneOptions: DropzoneOptions = {
   accept: {
     "application/pdf": [".pdf"],
   },
   multiple: false,
   maxFiles: 1,
-  maxSize: 1000000, // 1mb
+  maxSize: maxFileSizeInMB * 1024 * 1024,
 };
 
 export type ResumeDropzoneProps = {
@@ -24,53 +27,86 @@ export function ResumeDropzone({
   className,
   onFileAccepted
 }: ResumeDropzoneProps) {
+  const [rejectedFiles, setRejectedFiles] = useState<FileRejection[]>([]);
+
   const onDropAccepted = useCallback((acceptedFiles: File[]) => {
+    setRejectedFiles([]);
     onFileAccepted(acceptedFiles[0]);
-    // acceptedFiles.forEach((file) => {
-    //   const reader = new FileReader()
+  }, [setRejectedFiles, onFileAccepted]);
 
-    //   reader.onabort = () => console.log('file reading was aborted')
-    //   reader.onerror = () => console.log('file reading has failed')
-    //   reader.onload = () => {
-    //   // Do whatever you want with the file contents
-    //     const binaryStr = reader.result
-    //     console.log("🚀 ~ ResumeDropzone ~ binaryStr:", binaryStr)
-    //   }
-    //   reader.readAsArrayBuffer(file)
-    // })
-  }, [onFileAccepted]);
-
-  const onDropRejected = useCallback((rejectedFiles: FileRejection[]) => {
-    console.log("🚀 ~ ResumeDropzone ~ rejectedFiles:", rejectedFiles);
-  }, []);
-
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     ...defaultDropzoneOptions,
     onDropAccepted,
-    onDropRejected
+    onDropRejected: setRejectedFiles
   });
 
-  const baseClassNames = "";
+  const baseClassNames = "aspect-[210/297] cursor-pointer p-12 flex flex-col gap-12 items-center justify-center bg-white border-2 border-dashed rounded-sm";
   return (
     <div
       {...getRootProps()}
-      className={clsx(baseClassNames, className)}
+      className={clsx(baseClassNames, isDragActive ? "border-[var(--color-primary)]" : "border-gray-300", className)}
+      style={{ width: 210 * 2 }}
     >
       <input {...getInputProps()} />
-      <div className="cursor-pointer p-12 flex w-full h-full items-center justify-center bg-white border border-dashed border-gray-300 rounded-sm">
-        <div className="text-center">
-          <div className="mt-4 flex flex-wrap justify-center text-sm/6 text-gray-600">
-            <span className="pe-1 font-medium text-gray-800">
-              Drop your file here or
-            </span>
-            <span className="bg-white font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] rounded-lg decoration-2 hover:underline">browse</span>
-          </div>
+      <FileUpIcon className="inline-block shrink-0 size-16 text-gray-300" strokeWidth={0.6} />
+      <div className="flex flex-col items-center gap-4">
+        <div className="font-medium text-gray-700 text-lg">
+          Drag & drop your resume here
+        </div>
 
-          <p className="mt-1 text-xs text-gray-400">
-            Pick a photo up to {defaultDropzoneOptions.maxSize ? defaultDropzoneOptions.maxSize / 1000000 : "1"}MB.
-          </p>
+        <div className="text-sm text-gray-400">
+          OR
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button
+            variant="primary"
+            size="small"
+            StartIcon={HardDriveUploadIcon} 
+          >
+            Upload
+          </Button>
+          <span className="font-medium text-gray-600">from your device</span>
+        </div>
+
+        <div className="text-sm text-gray-400">
+          OR
+        </div>
+
+        <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+          <Button
+            variant="neutral"
+            size="small"
+            StartIcon={CloudDownloadIcon}
+          >
+            Choose
+          </Button>
+          <span className="font-medium text-gray-600">from previously uploaded</span>
         </div>
       </div>
+
+      <div className="flex items-center justify-center gap-6 text-sm text-gray-400">
+        <div className="flex items-center gap-1">
+          <FileWarningIcon className="inline-block shrink-0 size-4" />
+          <span className="">PDF files only</span>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <CloudUploadIcon className="inline-block shrink-0 size-4" />
+          <span className="">Up to {maxFileSizeInMB}MB</span>
+        </div>
+      </div>
+
+      {rejectedFiles.length > 0 ? (
+        <ul className="flex flex-col gap-1 pt-4">
+          {rejectedFiles[0].errors.map((error) => (
+            <li key={error.code} className="flex items-center gap-2 text-sm text-red-600">
+              <OctagonAlertIcon className="inline-block shrink-0 size-4" />
+              {error.message}
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }

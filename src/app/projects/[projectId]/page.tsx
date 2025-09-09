@@ -19,7 +19,7 @@ export default function ProjectPage() {
   return (
     <div className="h-full flex flex-col md:grid md:grid-cols-2 gap-4 overflow-y-auto md:overflow-hidden">
       <div className="flex flex-col p-3 xs:p-4 xl:px-6 xl:py-8 gap-8 md:overflow-hidden">
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col items-center justify-center">
           {resumeFile ? (
             <ResumePreview
               file={resumeFile}
