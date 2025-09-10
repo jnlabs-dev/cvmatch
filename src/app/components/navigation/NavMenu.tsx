@@ -19,7 +19,7 @@ import {
 import { Button } from "@/app/components/ui/Button";
 import { NavMenuItem, type NavMenuItemProps } from "@/app/components/navigation/NavMenuItem";
 
-import { SIDEBAR_SELECTOR } from "@/app/constants/layout.constants";
+import { closeSidebar } from "@/app/utils/hsOverlayHelpers";
 
 type NavMenuProps = {
   className?: string
@@ -85,12 +85,6 @@ export function NavMenu({
 
   const isActiveMenuItem = (item: NavMenuItemProps) => pathname.startsWith(item.path);
 
-  const handleCloseHSOverlay = () => {
-    if (typeof window !== "undefined" && window.HSOverlay) {
-      window.HSOverlay.close(SIDEBAR_SELECTOR);
-    }
-  };
-
   return (
     <nav className={clsx("w-full min-h-full flex flex-col justify-between gap-8 overflow-hidden", className)}>
       <div className="flex flex-col gap-4">
@@ -100,7 +94,7 @@ export function NavMenu({
               <NavMenuItem
                 {...item}
                 active={isActiveMenuItem(item)}
-                onClick={handleCloseHSOverlay}
+                onClick={closeSidebar}
               />
             </li>
           ))}
@@ -111,7 +105,7 @@ export function NavMenu({
           StartIcon={PlusIcon}
           onClick={() => {
             router.push("/projects/new");
-            handleCloseHSOverlay();
+            closeSidebar();
           }}
         >
           <span className="hs-overlay-minified:hidden">New Project</span>
@@ -123,7 +117,7 @@ export function NavMenu({
             <NavMenuItem
               {...item}
               active={isActiveMenuItem(item)}
-              onClick={handleCloseHSOverlay}
+              onClick={closeSidebar}
             />
           </li>
         ))}

@@ -7,6 +7,7 @@ declare global {
       open: (selector: string) => void;
       close: (selector: string) => void;
       getInstance<T>(target: HTMLElement | string, isInstance?: boolean): ICollectionItem<T>;
+      minify(target: HTMLElement | string, isMinified: boolean): void;
     } | undefined;
   }
 }

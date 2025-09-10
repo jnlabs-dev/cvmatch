@@ -11,6 +11,8 @@ import { Button } from "@/app/components/ui/Button";
 import { ResumeDropzone } from "@/app/components/resume/ResumeDropzone";
 import { ResumePreview } from "@/app/components/resume/ResumePreview";
 
+import { toggleSidebarMinified } from "@/app/utils/hsOverlayHelpers";
+
 type ProjectPageParams = {
   projectId: string
 }
@@ -27,6 +29,11 @@ export default function ProjectPage() {
     router.push("/projects");
   };
 
+  const onFileAccepted = (acceptedFile: File) => {
+    toggleSidebarMinified(true);
+    setResumeFile(acceptedFile);
+  }
+
   return (
     <div className="h-full flex flex-col md:grid md:grid-cols-2 overflow-y-auto md:overflow-hidden">
       <div className="flex flex-col p-3 xs:p-4 xl:px-6 xl:py-8 gap-8 md:overflow-hidden">
@@ -39,7 +46,7 @@ export default function ProjectPage() {
           ) : (
             <ResumeDropzone
               className="mb-8"
-              onFileAccepted={setResumeFile}
+              onFileAccepted={onFileAccepted}
             />
           )}
         </div>
