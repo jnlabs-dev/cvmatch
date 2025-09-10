@@ -4,12 +4,11 @@ import { useParams, useRouter } from "next/navigation";
 
 import { useState } from "react";
 
-import { SaveIcon } from "lucide-react";
-
-import { TextInput } from "@/app/components/ui/TextInput";
-import { Button } from "@/app/components/ui/Button";
 import { ResumeDropzone } from "@/app/components/resume/ResumeDropzone";
 import { ResumePreview } from "@/app/components/resume/ResumePreview";
+
+import { ProjectHeader } from "@/app/components/project/ProjectHeader";
+import { ProjectStepper, ProjectStepId } from "@/app/components/project/ProjectStepper";
 
 import { toggleSidebarMinified } from "@/app/utils/hsOverlayHelpers";
 
@@ -21,7 +20,9 @@ export default function ProjectPage() {
   const { projectId } = useParams<ProjectPageParams>();
   const router = useRouter();
 
-  const [projectName, setProjectName] = useState(projectId === "new" ? "Untitled Project" : "");
+  const initialProjectName = projectId === "new" ? "Untitled Project" : "";
+  const [currentStep, setCurrentStep] = useState<ProjectStepId>(ProjectStepId.Setup);
+  const [projectName, setProjectName] = useState(initialProjectName);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
 
   const onCancel = () => {
@@ -32,6 +33,11 @@ export default function ProjectPage() {
   const onFileAccepted = (acceptedFile: File) => {
     toggleSidebarMinified(true);
     setResumeFile(acceptedFile);
+  }
+
+  const hasUnsavedChanges = projectName.trim() !== initialProjectName || !!resumeFile;
+  const onSave = () => {
+    // TODO: handle save
   }
 
   return (
@@ -52,29 +58,18 @@ export default function ProjectPage() {
         </div>
       </div>
       <div className="bg-white border-l border-gray-200">
-        <div className="flex items-center justify-between p-3 xs:p-4 xl:p-6 border-b border-gray-200">
-          <TextInput
-            name="projectName"
-            placeholder="Project Name"
-            value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
-          />
-          <div className="flex gap-2">
-            <Button
-              size="small"
-              onClick={onCancel}
-            >
-              Cancel
-            </Button>
-            <Button
-              size="small"
-              disabled
-              StartIcon={SaveIcon}
-            >
-              Save
-            </Button>
-          </div>
-        </div>
+        <ProjectHeader
+          className="border-b border-gray-200"
+          projectName={projectName}
+          hasUnsavedChanges={hasUnsavedChanges}
+          setProjectName={setProjectName}
+          onCancel={onCancel}
+          onSave={onSave}
+        />
+        <ProjectStepper
+          className="border-b border-gray-200"
+          activeStep={currentStep}
+        />
       </div>
     </div>
   )
