@@ -22,7 +22,7 @@ export const getStepProgressMap = ({
     [ProjectStepId.Export]: 0,
   };
   if (resumeProvided) {
-    progressMap[ProjectStepId.Setup] += 100;
+    progressMap[ProjectStepId.Setup] += 50;
   }
   if (jobProvided) {
     progressMap[ProjectStepId.Setup] += 50;

@@ -49,7 +49,10 @@ export function ResumeDropzone({
       style={{ width: 210 * 2 }}
     >
       <input {...getInputProps()} />
-      <FileUpIcon className="inline-block shrink-0 size-16 text-gray-300" strokeWidth={0.6} />
+      <FileUpIcon
+        className="inline-block shrink-0 size-16 text-gray-300"
+        strokeWidth={0.5}
+      />
       <div className="flex flex-col items-center gap-4">
         <div className="font-medium text-gray-700 text-lg">
           Drag & drop your resume here

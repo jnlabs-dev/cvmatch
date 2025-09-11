@@ -10,7 +10,10 @@ import { ResumePreview } from "@/app/components/resume/ResumePreview";
 import { ProjectHeader } from "@/app/components/project/ProjectHeader";
 import { ProjectStepper } from "@/app/components/project/ProjectStepper";
 
+import { ProjectSetupSection } from "@/app/components/project/ProjectSetupSection";
+
 import { ProjectStepId, getStepProgressMap } from "@/app/lib/project/steps";
+import { JobDetails } from "@/app/lib/job/jobDetails";
 
 import { toggleSidebarMinified } from "@/app/utils/hsOverlayHelpers";
 
@@ -26,6 +29,7 @@ export default function ProjectPage() {
   const [currentStep, setCurrentStep] = useState<ProjectStepId>(ProjectStepId.Setup);
   const [projectName, setProjectName] = useState(initialProjectName);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [jobDetails, setJobDetails] = useState<JobDetails | null>(null);
 
   const stepProgressMap = useMemo(() => getStepProgressMap({
     resumeProvided: !!resumeFile,
@@ -45,6 +49,20 @@ export default function ProjectPage() {
   const hasUnsavedChanges = projectName.trim() !== initialProjectName || !!resumeFile;
   const onSave = () => {
     // TODO: handle save
+  }
+
+  const renderCurrentStep = () => {
+    switch (currentStep) {
+      case ProjectStepId.Setup:
+        return (
+          <ProjectSetupSection
+            jobDetails={jobDetails}
+            onJobDetailsChange={setJobDetails}
+          />
+        );
+      default:
+        return null;
+    }
   }
 
   return (
@@ -78,6 +96,7 @@ export default function ProjectPage() {
           activeStep={currentStep}
           stepProgressMap={stepProgressMap}
         />
+        {renderCurrentStep()}
       </div>
     </div>
   )
