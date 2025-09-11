@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { type LucideIcon } from 'lucide-react';
 
 export type ButtonProps = {
-  variant?: "primary" | "neutral";
+  variant?: "primary" | "secondary" | "neutral";
   size?: "default" | "small";
   children: React.ReactNode;
   className?: string;
@@ -31,8 +31,15 @@ export function Button({
       "bg-[image:var(--gradient-primary)] bg-[length:160%_150%] shadow",
       disabled ? "opacity-70 text-gray-100" : "text-white hover:bg-[position:100%_0]"
     ),
+    secondary: clsx(
+      "border shadow/5",
+      disabled ?
+        "text-[var(--color-secondary)]/40 bg-muted/10" 
+        :
+        "border-[var(--color-secondary)] text-[var(--color-secondary)] hover:text-white hover:bg-[var(--color-secondary)]"
+    ),
     neutral: clsx(
-      "border border-border shadow/5",
+      "border border-gray-200 shadow/5",
       disabled ? "text-muted bg-muted/20" : "text-foreground bg-surface hover:bg-muted/10"
     )
   };

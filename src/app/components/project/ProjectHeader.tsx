@@ -41,6 +41,7 @@ export function ProjectHeader({
         </Button>
         <Button
           size="small"
+          variant="secondary"
           disabled={!hasUnsavedChanges}
           StartIcon={SaveIcon}
           onClick={onSave}

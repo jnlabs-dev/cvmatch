@@ -77,7 +77,7 @@ export function ResumeDropzone({
 
         <div className="flex items-center gap-2">
           <Button
-            variant="neutral"
+            variant="secondary"
             size="small"
             StartIcon={CloudDownloadIcon}
           >

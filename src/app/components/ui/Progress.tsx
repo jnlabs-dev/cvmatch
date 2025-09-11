@@ -2,6 +2,7 @@ import clsx from "clsx";
 
 export type ProgressProps = {
   className?: string;
+  color?: "primary" | "secondary" | "gradient";
   size?: "small" | "default" | "large";
   value: number; // percentage 0-100
 };
@@ -9,6 +10,7 @@ export type ProgressProps = {
 export function Progress({
   className,
   size = "default",
+  color = "secondary",
   value
 }: ProgressProps) {
   const baseClassNames = "flex w-full bg-gray-200 rounded-full overflow-hidden";
@@ -16,6 +18,11 @@ export function Progress({
     small: "h-1",
     default: "h-1.5",
     large: "h-2"
+  }
+  const colors = {
+    primary: "bg-[var(--color-primary)]",
+    secondary: "bg-[var(--color-secondary)]",
+    gradient: "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]"
   }
   return (
     <div
@@ -26,7 +33,10 @@ export function Progress({
       className={clsx(baseClassNames, sizes[size], className)}
     >
       <div
-        className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500"
+        className={clsx(
+          "flex flex-col justify-center rounded-full overflow-hidden transition duration-500",
+          colors[color]
+        )}
         style={{ width: `${value}%` }}
       />
     </div>

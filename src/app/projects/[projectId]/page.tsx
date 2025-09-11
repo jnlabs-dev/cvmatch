@@ -2,13 +2,15 @@
 
 import { useParams, useRouter } from "next/navigation";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { ResumeDropzone } from "@/app/components/resume/ResumeDropzone";
 import { ResumePreview } from "@/app/components/resume/ResumePreview";
 
 import { ProjectHeader } from "@/app/components/project/ProjectHeader";
-import { ProjectStepper, ProjectStepId } from "@/app/components/project/ProjectStepper";
+import { ProjectStepper } from "@/app/components/project/ProjectStepper";
+
+import { ProjectStepId, getStepProgressMap } from "@/app/lib/project/steps";
 
 import { toggleSidebarMinified } from "@/app/utils/hsOverlayHelpers";
 
@@ -24,6 +26,11 @@ export default function ProjectPage() {
   const [currentStep, setCurrentStep] = useState<ProjectStepId>(ProjectStepId.Setup);
   const [projectName, setProjectName] = useState(initialProjectName);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+
+  const stepProgressMap = useMemo(() => getStepProgressMap({
+    resumeProvided: !!resumeFile,
+    jobProvided: false
+  }), [resumeFile]);
 
   const onCancel = () => {
     // TODO: show a confirmation dialog
@@ -69,6 +76,7 @@ export default function ProjectPage() {
         <ProjectStepper
           className="border-b border-gray-200"
           activeStep={currentStep}
+          stepProgressMap={stepProgressMap}
         />
       </div>
     </div>
